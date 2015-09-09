@@ -1,0 +1,29 @@
+{
+  "name": "ToDo",
+  "version": "0.0.1",
+  "description": "A simple ToDo App developed using NodeJS & AngularJS",
+  "keywords": [
+    "To Do"
+  ],
+  "author": {
+    "name": "Prabhdeep Singh",
+    "email": "au.prabh@gmail.com",
+    "url": "http://todo-digixuberance.rhcloud.com/"
+  },
+  "homepage": "http://todo-digixuberance.rhcloud.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auprabh/todo.git"
+  },
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "express": "~3.4.4"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "private": true,
+  "main": "server.js"
+}

@@ -1,0 +1,45 @@
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.material-icons.md-dark { color: rgba(0, 188, 212, 0.9); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 188, 212, 0.1); }
+
+.material-icons.md-light { color: rgba(0, 188, 212, 0.1); }
+.material-icons.md-light.md-inactive { color: rgba(0, 188, 212, 0.9); }
+
+md-card {background-color: #ffffff;}
+h3{margin-top: 0px;}
+
+.loginCard {width: 400px; height: 300px;}
+
+/**
+ui-view-container{
+ position: relative;   
+}
+
+[ui-view].ng-enter {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: bounceInDown;
+    animation-duration: 1s;
+    animation-name: bounceInDown;
+    opacity:0;
+}
+
+[ui-view].ng-enter.ng-enter-active {
+    opacity:1;
+}
+
+[ui-view].ng-leave {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: bounceOutDown;
+    animation-duration: 1s;
+    animation-name: bounceOutDown;
+    opacity:0;
+}
+
+[ui-view].ng-leave.ng-leave-active {
+    opacity:1;
+}
+**/

@@ -1,0 +1,30 @@
+<div ng-controller="LoginCtrl" layout="row" layout-align="center center">
+    <form name="loginForm" novalidate>
+        <md-card class="loginCard">
+            <md-card-content>
+                <div layout="row" layout-align="center center">
+                    <h3 class="md-body-2">Please enter your credentials</h3>
+                </div>  
+                <div layout="column">
+                    <md-input-container>
+                        <label>Username</label>
+                        <input type="text" name="username" data-ng-model="user.username" required>
+                        <div ng-messages="loginForm.username.$error" ng-if="loginForm.$submitted || loginForm.username.$touched">
+                            <div ng-message="required">Username is required. [Hint: bean]</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Password</label>
+                        <input type="password" name="password" data-ng-model="user.password" required>
+                        <div ng-messages="loginForm.password.$error" ng-if="loginForm.$submitted || loginForm.password.$touched">
+                            <div ng-message="required">Password is required. [Hint: misterbean]</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </md-card-content>
+            <div class="md-actions" layout="row" layout-align="end center">
+                <md-button class="md-raised md-accent" ng-disabled="loginForm.$invalid" ng-click="login()">Sign in</md-button>
+            </div>
+        </md-card>
+    </form>    
+</div>

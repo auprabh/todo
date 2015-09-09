@@ -1,0 +1,16 @@
+<div layout="row" ng-controller="HomeCtrl" flex>
+    <div layout="column" flex id="content">
+        
+        <md-content class="md-padding">
+            <md-tabs md-selected="selectedIndex" md-dynamic-height flex> 
+                <md-tab ng-repeat="tab in tabs" label="{{tab.title}}" md-on-select="loadTabContent(tab.state)"></md-tab>
+            </md-tabs>
+        </md-content>
+
+        <md-content class="md-padding" flex>
+            <div ui-view-container>
+                <div ui-view></div>
+            </div>
+        </md-content>
+    </div>
+</div>
