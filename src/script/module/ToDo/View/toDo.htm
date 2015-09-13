@@ -1,5 +1,158 @@
-<md-card>
-  <md-card-content>
-    To Do content
-  </md-card-content>
-</md-card>
+<div ng-controller="ToDoCtrl">
+  <form name="toDoForm" novalidate>
+
+      <div layout="row" flex>
+
+        <div layout="column" flex="20">
+          <md-card>
+            <md-card-content>
+
+              <div>
+                <h3 class="md-headline-1">Add new task</h3>
+              </div>
+
+              <div layout="column" flex>
+
+                <md-input-container flex>
+                  <label>Task</label>
+                  <textarea type="text" name="task" data-ng-model="todo.task" required md-maxlength="140"></textarea>
+                  <div ng-messages="toDoForm.task.$error" ng-if="toDoForm.$submitted || toDoForm.task.$touched">
+                    <div ng-message="required">Task is required.</div>
+                    <div ng-message="md-maxlength">You have exceeded 140 characters.</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container flex>
+                  <label>Category</label>
+                  <md-select name="category" ng-model="todo.category" required>
+                    <md-option ng-repeat="category in $storage.categories" value="{{category}}">{{category.name}}</md-option>
+                  </md-select>
+                  <div ng-messages="toDoForm.category.$error" ng-if="toDoForm.$submitted || toDoForm.category.$touched">
+                    <div ng-message="required">Category is required.</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container flex>
+                  <label>Priority</label>
+                  <md-select name="priority" ng-model="todo.priority" required>
+                    <md-option ng-repeat="priority in $storage.priorities" value="{{priority}}">{{priority.name}}</md-option>
+                  </md-select>
+                  <div ng-messages="toDoForm.priority.$error" ng-if="toDoForm.$submitted || toDoForm.priority.$touched">
+                    <div ng-message="required">Priority is required.</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container flex>
+                  <label>Complete by</label>
+                  <input name="completeBy" type="date" ng-model="todo.completeBy" required>
+                  <div ng-messages="toDoForm.completeBy.$error" ng-if="toDoForm.$submitted || toDoForm.completeBy.$touched">
+                    <div ng-message="required">Complete by is required.</div>
+                  </div>
+                </md-input-container>
+
+              </div>
+            </md-card-content>
+
+            <md-button class="md-raised md-accent" ng-disabled="toDoForm.$invalid" ng-click="addToDo()">
+              <i class="material-icons md-18" style="vertical-align: middle;">add_box</i> Add</md-button>
+            </md-button>
+            <div>&nbsp;</div>
+          </md-card>
+        </div>
+
+        <div layout="column" flex="80">
+
+          <md-card>
+            <md-card-content>
+              <div layout="row" flex  layout-align="center center">
+                <div layout="column" flex="70">
+                  <div>
+                    <h3 class="md-headline-1 headline" flex layout="row">
+                      Total {{data.length}} task<span ng-show="'data.length>1'">s</span>&nbsp;found
+                    </h3>
+                  </div>
+                  <div>
+                    <h3 class="md-headline-1" layout="row">
+                      <span class="showTasksIsFirst">Sort by:</span>
+                      <span class="showTasks">
+                        <a href="" ng-class="{active: isActive('isComplete')}" ng-click="order('isComplete')">Completion Status</a>
+                        <span class="sortorder" ng-show="predicate === 'isComplete'" ng-class="{reverse:reverse}"></span>
+                      </span>
+                      <span class="showTasks">|</span>
+                      <span class="showTasks">
+                        <a href="" ng-class="{active: isActive('task')}" ng-click="order('task')">Task</a>
+                        <span class="sortorder" ng-show="predicate === 'task'" ng-class="{reverse:reverse}"></span>
+                      </span>
+                      <span class="showTasks">|</span>
+                      <span class="showTasks">
+                        <a href="" ng-class="{active: isActive('completeBy')}" ng-click="order('completeBy')">Completion Date</a>
+                        <span class="sortorder" ng-show="predicate === 'completeBy'" ng-class="{reverse:reverse}"></span>
+                      </span>
+                      <span class="showTasks">|</span>
+                      <span class="showTasks">
+                        <a href="" ng-class="{active: isActive('priority.name')}" ng-click="order('priority.name')">Priority</a>
+                        <span class="sortorder" ng-show="predicate === 'priority.name'" ng-class="{reverse:reverse}"></span>
+                      </span>
+                      <span class="showTasks">|</span>
+                      <span class="showTasks">
+                        <a href="" ng-class="{active: isActive('category.name')}" ng-click="order('category.name')">Category</a>
+                        <span class="sortorder" ng-show="predicate === 'category.name'" ng-class="{reverse:reverse}"></span>
+                      </span>
+                    </h3>
+                  </div>
+                </div>
+                <div flex="30" layout="row" layout-align="center center">
+                  <md-input-container flex>
+                    <label>Search within your task description</label>
+                    <input name="searchTask" type="text" ng-model="search.task">
+                  </md-input-container>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+
+
+          <md-card ng-repeat="item in data | orderBy:predicate:reverse | filter:search" layout="column">
+            <md-card-content ng-value="item" layout="column">
+
+              <div layout="row">
+                <div layout="row" flex="15"><h6 class="taskCardHeading">Is this task complete?</h6></div>
+                <div layout="row" flex="35"><h6 class="taskCardHeading">Task description</h6></div>
+                <div layout="row" flex="15"><h6 class="taskCardHeading">Complete by</h6></div>
+                <div layout="row" flex="10"><h6 class="taskCardHeading">Priority</h6></div>
+                <div layout="row" flex="20"><h6 class="taskCardHeading">Category</h6></div>
+                <div layout="row" flex="5"><h6 class="taskCardHeading">Delete?</h6></div>
+              </div>
+
+              <div layout="row">
+                <div layout="row" flex="15" layout-align="start center">
+                  <md-switch ng-model="item.isComplete" aria-label="Is Complete">Yes</md-switch>
+                </div>
+                <div layout="row" flex="35" layout-align="start center">{{item.task}}</div>
+                <div layout="row" flex="15" layout-align="start center">{{item.completeBy | date: 'dd MMM yyyy' }}</div>
+                <div layout="row" flex="10" layout-align="start center">{{item.priority.name}}</div>
+                <div layout="row" flex="20" layout-align="start center">{{item.category.name}}</div>
+                <div layout="column" flex="5" layout-align="start center">
+                  <!--div>
+                    <md-button class="md-raised md-accent md-fab md-mini" aria-label="Edit Category" ng-click="editToDo(item)">
+                      <i class="material-icons md-24" style="vertical-align: middle;">edit</i>
+                    </md-button>
+                  </div -->
+                  <div>
+                    <md-button class="md-raised md-accent md-fab md-mini" aria-label="Delete Category" ng-click="deleteToDo(item)">
+                      <i class="material-icons md-24" style="vertical-align: middle;">clear</i>
+                    </md-button>
+                  </div>
+                </div>
+              </div>
+
+            </md-card-content>
+          </md-card>
+
+
+        </div>
+
+      </div>
+
+  </form>
+</div>

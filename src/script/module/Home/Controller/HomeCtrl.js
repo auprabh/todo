@@ -6,7 +6,7 @@
     function HomeCtrl($scope, $state, $location) {
         $scope.appName = 'todo';
         $scope.tabs = [
-          { title: 'Dashboard', state: '/home/dashBoard'},
+          //{ title: 'Dashboard', state: '/home/dashBoard'},
           { title: 'ToDo\'s', state: '/home/toDo'},
           { title: 'Categories', state: '/home/category'}
         ];

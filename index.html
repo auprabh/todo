@@ -10,34 +10,31 @@
         <link rel="stylesheet" href="style/app.css">
     </head>
 
-    <body layout="column">
-        
-        <div layout="row" ng-controller="CoreCtrl" flex>
-            
-            <div layout="column" flex id="content">
-                
-                 <md-content>
-                    <md-toolbar>
-                      <div class="md-toolbar-tools">
-                        <h2>
-                          <span layout="row" layout-align="start center"><i class="material-icons md-36">event</i> {{appName}}</span>
-                        </h2>
-                        <span flex></span>
-                        <span ng-show='isAuthenticated'>
-                            Welcome Mr. Bean <md-button class="md-raised md-accent" aria-label="Logout" ng-click=logout()>Sign out</md-button> </span>  
-                      </div>
-                    </md-toolbar>
-                </md-content> 
-                
-                <md-content class="md-padding" flex>
-                    <div ui-view-container>
-                        <div ui-view></div>
-                    </div>
-                </md-content>
-                
+    <body layout="column" ng-controller="CoreCtrl">
+
+        <md-content layout="column">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        <span layout="row" layout-align="start center"><i class="material-icons md-36">event</i> {{appName}}</span>
+                    </h2>
+                    <span flex></span>
+                    <span ng-show='isAuthenticated'>
+                        Welcome Mr. Bean
+                        <md-button class="md-raised md-accent" aria-label="Logout" ng-click=logout()>
+                            <i class="material-icons md-24" style="vertical-align: middle;">lock</i> Sign out</md-button>
+                        </md-button>
+                    </span>
+                </div>
+            </md-toolbar>
+        </md-content>
+
+
+        <md-content class="md-padding" id="content" flex layout="column">
+            <div ui-view-container>
+                <div ui-view></div>
             </div>
-            
-        </div>
+        </md-content>
 
 
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
@@ -46,12 +43,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.10.1/angular-material.min.js"></script>
         <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-messages.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.9/ngStorage.min.js"></script>
         
         <script src="/script/shared/Controller/CoreCtrl.js"></script>
-        
         <script src="/script/module/Home/Controller/HomeCtrl.js"></script>
-        
         <script src="/script/module/Login/Controller/LoginCtrl.js"></script>
+        <script src="/script/module/ToDo/Controller/ToDoCtrl.js"></script>
+        <script src="/script/module/Category/Controller/CategoryCtrl.js"></script>
 
     </body>
 </html>

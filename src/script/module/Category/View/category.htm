@@ -1,5 +1,115 @@
-<md-card>
-  <md-card-content>
-    Category content
-  </md-card-content>
-</md-card>
+<div ng-controller="CategoryCtrl">
+  <form name="categoryForm" novalidate>
+    <md-card>
+      <md-card-content>
+        <div>
+          <h3 class="md-headline-1">Categories</h3>
+        </div>
+        <div layout="row">
+          <div flex="80">
+            <md-input-container>
+              <label>Category</label>
+              <input type="text" name="category" data-ng-model="category.name" required>
+              <div ng-messages="categoryForm.category.$error" ng-if="categoryForm.$submitted || categoryForm.category.$touched">
+                <div ng-message="required">Category is required.</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div flex="20" class="md-actions" layout="row" layout-align="end center">
+            <md-button class="md-raised md-accent" ng-disabled="categoryForm.$invalid" ng-click="addCategory()">
+              <i class="material-icons md-24" style="vertical-align: middle;">add_circle</i> Add</md-button>
+            </md-button>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+
+    <md-card>
+      <md-card-content>
+        <div layout="row">
+          <span layout="column" flex="50" layout-align="center start">
+            <span class="md-headline headline" ng-show="$storage.categories.length >= 1">
+              Found {{data.length}} categories
+            </span>
+            <span class="md-headline headline" ng-show="$storage.categories.length == 0">
+              No categories found
+            </span>
+          </span>
+          <span flex="50">
+            <md-input-container ng-show="$storage.categories.length >= 1">
+              <label>Quick Search</label>
+              <input type="text" name="searchCategoryByName" ng-model="search.$">
+            </md-input-container>
+          </span>
+        </div>
+      </md-card-content>
+    </md-card>
+
+    <!--<md-card style="background-color:#CFD8DC;">
+      <md-card-content>
+        <div layout="row">
+          <div layout="column" flex="70" layout-align="center start">
+            <div class="md-headline headline" ng-if="$storage.categories.length >= 1">
+              Displaying {{(currentPage*pageSize)+1}} -
+              <span ng-if="((currentPage*pageSize)+pageSize) < (data.length)">{{(currentPage*pageSize)+pageSize}}</span>
+              <span ng-if="((currentPage*pageSize)+pageSize) >= (data.length)">{{(data.length)}}</span>
+              of {{data.length}} categories
+            </div>
+            <div class="md-headline headline" ng-if="$storage.categories.length == 0">No Categories found.</div>
+            <div class="md-subhead" ng-if="$storage.categories.length >= 1">Sort Category: </div>
+          </div>
+          <div layout="column" flex="30" layout-align="center end">
+            <div class="md-subhead" ng-if="$storage.categories.length >= 1">
+
+              <md-button ng-disabled="currentPage == 0" class="md-raised md-accent md-fab md-mini" aria-label="Previous" ng-click="previous();">
+                <i class="material-icons md-24" style="vertical-align: middle;">chevron_left</i>
+              </md-button>
+              {{currentPage+1}}/{{numberOfPages()}}
+              <md-button ng-disabled="currentPage >= data.length/pageSize - 1" class="md-raised md-accent md-fab md-mini" aria-label="Next" ng-click="next();">
+                <i class="material-icons md-24" style="vertical-align: middle;">chevron_right</i>
+              </md-button>
+
+            </div>
+            <div class="md-subhead" ng-show="$storage.categories.length >= 1">
+              <md-input-container>
+                <label>Quick Search</label>
+                <input type="text" name="searchCategoryByName" ng-model="search.$">
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>-->
+
+    <!--div ng-repeat="item in data | startFrom:currentPage*pageSize | limitTo:pageSize | filter:search" -->
+      <md-card ng-repeat="item in data | filter:search">
+        <md-card-content ng-value="item" layout="row" layout-align="start center">
+            <span flex="80" ng-show="!editMode">{{item.name}}</span>
+            <span flex="80" ng-show="editMode">
+              <md-input-container>
+                <label>Edit Category</label>
+                <input type="text" name="item" data-ng-model="item.name" required>
+                <div ng-messages="categoryForm.item.$error" ng-if="categoryForm.$submitted || categoryForm.item.$touched">
+                  <div ng-message="required">Category is required.</div>
+                </div>
+              </md-input-container>
+            </span>
+            <span flex="10" layout="row" layout-align="center center" ng-show="editMode">
+              <md-button class="md-raised md-accent md-fab md-mini" aria-label="Update Category" ng-click="updateCategory(item)">
+                <i class="material-icons md-24" style="vertical-align: middle;">done</i>
+              </md-button>
+            </span>
+            <span flex="10" layout="row" layout-align="center center" ng-show="!editMode">
+              <md-button class="md-raised md-accent md-fab md-mini" aria-label="Edit Category" ng-click="editCategory(item)">
+                <i class="material-icons md-24" style="vertical-align: middle;">edit</i>
+              </md-button>
+            </span>
+            <span flex="10" layout="row" layout-align="center center" ng-show="!editMode">
+              <md-button class="md-raised md-accent md-fab md-mini" aria-label="Delete Category" ng-click="deleteCategory(item)">
+                <i class="material-icons md-24" style="vertical-align: middle;">clear</i>
+              </md-button>
+            </span>
+        </md-card-content>
+      </md-card>
+  </form>
+</div>

@@ -10,13 +10,29 @@
 .material-icons.md-light.md-inactive { color: rgba(0, 188, 212, 0.9); }
 
 md-card {background-color: #ffffff;}
-h3{margin-top: 0px;}
 
-.loginCard {width: 400px; height: 300px;}
+h3{margin-top: 0px; margin-bottom: 0px;}
+h6{margin-top: 0px; margin-bottom: 0px;}
+
+md-card.loginCard {width: 400px; height: 300px;}
+
+.headline{color: #FF4081;}
+
+.showTasks{padding-left: 2px; padding-right: 2px;}
+.showTasksIsFirst {padding-right: 2px;}
+
+.taskCardHeading{color: #FF4081;}
+
+.sortorder:after {
+    content: '\25b2';
+}
+.sortorder.reverse:after {
+    content: '\25bc';
+}
 
 /**
 ui-view-container{
- position: relative;   
+ position: relative;
 }
 
 [ui-view].ng-enter {
